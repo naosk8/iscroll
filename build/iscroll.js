@@ -1,4 +1,4 @@
-/*! iScroll v5.2.0-snapshot ~ (c) 2008-2017 Matteo Spinelli ~ http://cubiq.org/license */
+/*! iScroll v5.2.0-snapshot ~ (c) 2008-2018 Matteo Spinelli ~ http://cubiq.org/license */
 (function (window, document, Math) {
 var rAF = window.requestAnimationFrame	||
 	window.webkitRequestAnimationFrame	||
@@ -1167,14 +1167,15 @@ IScroll.prototype = {
 			that._execEvent('scrollStart');
 		}
 
-		// Execute the scrollEnd event after 400ms the wheel stopped scrolling
-		clearTimeout(this.wheelTimeout);
+        // Fire scrollEnd event without no wait
+		// Ref: Previously: Execute the scrollEnd event after 400ms the wheel stopped scrolling
+        clearTimeout(this.wheelTimeout);
 		this.wheelTimeout = setTimeout(function () {
 			if(!that.options.snap) {
 				that._execEvent('scrollEnd');
 			}
 			that.wheelTimeout = undefined;
-		}, 400);
+		}, 0);
 
 		if ( 'deltaX' in e ) {
 			if (e.deltaMode === 1) {

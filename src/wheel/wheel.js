@@ -28,14 +28,15 @@
 			that._execEvent('scrollStart');
 		}
 
-		// Execute the scrollEnd event after 400ms the wheel stopped scrolling
-		clearTimeout(this.wheelTimeout);
+        // Fire scrollEnd event without no wait
+		// Ref: Previously: Execute the scrollEnd event after 400ms the wheel stopped scrolling
+        clearTimeout(this.wheelTimeout);
 		this.wheelTimeout = setTimeout(function () {
 			if(!that.options.snap) {
 				that._execEvent('scrollEnd');
 			}
 			that.wheelTimeout = undefined;
-		}, 400);
+		}, 0);
 
 		if ( 'deltaX' in e ) {
 			if (e.deltaMode === 1) {
